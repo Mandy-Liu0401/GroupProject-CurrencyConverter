@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate method started");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         variablebinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(variablebinding.getRoot());
 
