@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.college.converter.databinding.ActivityMainBinding;
+
 /*
     TODOs:
     In groups of 4, complete the following tasks, 1 for each team member:
@@ -27,11 +29,23 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     String TAG = "Part2";
 
+    private ActivityMainBinding binding;
+
     static private final Float CONVERSION_RATE = 0.80F;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate method started");
         super.onCreate(savedInstanceState);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        binding.convertButton.setOnClickListener(view -> {
+            String result = "Conversion Result";
+            binding.resultId.setText(result);
+        });
+
+        binding.yourTextView.setText("Hello, ViewBinding!");
+        
         setContentView(R.layout.activity_main);
 
         Button buttonConvert = findViewById(R.id.convertButton);
@@ -40,6 +54,11 @@ public class MainActivity extends AppCompatActivity {
             convertCurrency(view);
         } );
         Log.i(TAG, "onCreate method finished"); // Exit log message
+
+
+
+
+
 
     }
 
