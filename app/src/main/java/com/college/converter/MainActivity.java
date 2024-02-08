@@ -1,15 +1,15 @@
 package com.college.converter;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.college.converter.databinding.ActivityMainBinding;
 
 /*
     TODOs:
@@ -25,16 +25,21 @@ import android.widget.TextView;
 
 */
 public class MainActivity extends AppCompatActivity {
+
+    private ActivityMainBinding variablebinding;
     String TAG = "Part2";
 
     static private final Float CONVERSION_RATE = 0.80F;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate method started");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        variablebinding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(variablebinding.getRoot());
 
-        Button buttonConvert = findViewById(R.id.convertButton);
+        Button buttonConvert = variablebinding.convertButton;
 
         buttonConvert.setOnClickListener( view ->  {
             convertCurrency(view);
@@ -46,11 +51,11 @@ public class MainActivity extends AppCompatActivity {
     public void convertCurrency(View view) {
         Log.i(TAG, "convertCurrency method started"); // Entry log message
 
-        EditText inputView = findViewById(R.id.entryId);
+        EditText inputView = variablebinding.entryId;
 
         String inputAmount = inputView.getText().toString();
 
-        TextView resultView = findViewById(R.id.resultId);
+        TextView resultView = variablebinding.resultId;
 
         if (!inputAmount.isEmpty()) {
             Float inputAmountDecimal = Float.valueOf(inputAmount);
