@@ -57,7 +57,11 @@ public class MainActivity extends AppCompatActivity {
 
             Float resultFloat = inputAmountDecimal * CONVERSION_RATE;
 
-            resultView.setText( resultFloat + " Euros" );
+            //resultView.setText( resultFloat + " Euros" );
+            String resultString = getString(R.string.result_euros, resultFloat);
+
+            resultView.setText(resultString);
+
         }
         Log.i(TAG, "convertCurrency method ended"); // Entry log message
     }
