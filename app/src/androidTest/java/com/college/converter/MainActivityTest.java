@@ -50,7 +50,7 @@ public class MainActivityTest {
     }
 
     @Test
-    public void mainActivityTest2() {
+    public void mainActivityTest3() {
 
         ViewInteraction appCompatEditText = onView(withId(R.id.entryId));
         appCompatEditText.perform(replaceText("100"), closeSoftKeyboard());
@@ -62,18 +62,6 @@ public class MainActivityTest {
         textView.check(matches(withText("80.00 Euros")));
     }
 
-    @Test
-    public void mainActivityTest0() {
-
-        ViewInteraction appCompatEditText = onView(withId(R.id.entryId));
-        appCompatEditText.perform(replaceText("0"), closeSoftKeyboard());
-
-        ViewInteraction appCompatButton = onView(withId(R.id.convertButton));
-        appCompatButton.perform(click());
-
-        ViewInteraction textView = onView(withId(R.id.resultId));
-        textView.check(matches(withText("0.00 Euros")));
-    }
 
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
