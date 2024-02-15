@@ -36,6 +36,10 @@ public class MainActivityTest {
     public ActivityScenarioRule<MainActivity> mActivityScenarioRule =
             new ActivityScenarioRule<>(MainActivity.class);
 
+    /**
+     * this method is testing a positive value of 10.
+     * @author: Mengying Liu
+     */
     @Test
     public void mainActivityTest() {
 
@@ -61,6 +65,24 @@ public class MainActivityTest {
         ViewInteraction textView = onView(withId(R.id.resultId));
         textView.check(matches(withText("1600.00 Euros")));
     }
+
+    /**
+     * this method is testing a dollar value of 0.
+     * @author: Mengying Liu
+     */
+    @Test
+    public void zeroDollarTest() {
+
+        ViewInteraction appCompatEditText = onView(withId(R.id.entryId));
+        appCompatEditText.perform(replaceText("0"), closeSoftKeyboard());
+
+        ViewInteraction appCompatButton = onView(withId(R.id.convertButton));
+        appCompatButton.perform(click());
+
+        ViewInteraction textView = onView(withId(R.id.resultId));
+        textView.check(matches(withText("0.00 Euros")));
+    }
+
 
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
