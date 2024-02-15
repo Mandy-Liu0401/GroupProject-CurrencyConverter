@@ -29,12 +29,25 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding variablebinding;
     String TAG = "Part2";
 
+    private ActivityMainBinding binding;
+
     static private final Float CONVERSION_RATE = 0.80F;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate method started");
         super.onCreate(savedInstanceState);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        binding.convertButton.setOnClickListener(view -> {
+            String result = "Conversion Result";
+            binding.resultId.setText(result);
+        });
+
+        binding.yourTextView.setText("Hello, ViewBinding!");
+        
+        setContentView(R.layout.activity_main);
         variablebinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(variablebinding.getRoot());
 
@@ -44,6 +57,11 @@ public class MainActivity extends AppCompatActivity {
             convertCurrency(view);
         } );
         Log.i(TAG, "onCreate method finished"); // Exit log message
+
+
+
+
+
 
     }
 
