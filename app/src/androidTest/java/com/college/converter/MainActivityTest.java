@@ -48,6 +48,19 @@ public class MainActivityTest {
         ViewInteraction textView = onView(withId(R.id.resultId));
         textView.check(matches(withText("8.00 Euros")));
     }
+    // This was done by Isaac
+    @Test
+    public void mainActivityTest2() {
+
+        ViewInteraction appCompatEditText = onView(withId(R.id.entryId));
+        appCompatEditText.perform(replaceText("2000"), closeSoftKeyboard());
+
+        ViewInteraction appCompatButton = onView(withId(R.id.convertButton));
+        appCompatButton.perform(click());
+
+        ViewInteraction textView = onView(withId(R.id.resultId));
+        textView.check(matches(withText("1600.00 Euros")));
+    }
 
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
