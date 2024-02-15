@@ -4,7 +4,6 @@ package com.college.converter;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -39,66 +38,15 @@ public class MainActivityTest {
 
     @Test
     public void mainActivityTest() {
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(5134);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
+        ViewInteraction appCompatEditText = onView(withId(R.id.entryId));
+        appCompatEditText.perform(replaceText("10"), closeSoftKeyboard());
 
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.entryId),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                0),
-                        isDisplayed()));
-        appCompatEditText.perform(click());
-
-
-        ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.entryId),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                0),
-                        isDisplayed()));
-        appCompatEditText2.perform(replaceText("10"), closeSoftKeyboard());
-
-
-        ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.entryId), withText("10"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                0),
-                        isDisplayed()));
-        appCompatEditText3.perform(pressImeActionButton());
-
-
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.convertButton), withText("Covert"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
-                        isDisplayed()));
+        ViewInteraction appCompatButton = onView(withId(R.id.convertButton));
         appCompatButton.perform(click());
 
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.resultId), withText("8.00 Euros"),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()));
+        ViewInteraction textView = onView(withId(R.id.resultId));
         textView.check(matches(withText("8.00 Euros")));
-
-
     }
 
     private static Matcher<View> childAtPosition(
