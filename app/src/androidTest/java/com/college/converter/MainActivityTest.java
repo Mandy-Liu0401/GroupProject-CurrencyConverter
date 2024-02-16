@@ -1,6 +1,5 @@
 package com.college.converter;
 
-
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -31,7 +30,6 @@ import org.junit.runner.RunWith;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
-
     @Rule
     public ActivityScenarioRule<MainActivity> mActivityScenarioRule =
             new ActivityScenarioRule<>(MainActivity.class);
@@ -52,6 +50,7 @@ public class MainActivityTest {
         ViewInteraction textView = onView(withId(R.id.resultId));
         textView.check(matches(withText("8.00 Euros")));
     }
+
     // This was done by Isaac
     @Test
     public void mainActivityTest2() {
@@ -83,6 +82,21 @@ public class MainActivityTest {
         textView.check(matches(withText("0.00 Euros")));
     }
 
+    /**
+     * Tests the app's behavior when a negative value is entered in the currency converter.
+     * Done by Zimeng Wang
+     */
+    @Test
+    public void negativeValueTest() {
+        ViewInteraction appCompatEditText = onView(withId(R.id.entryId));
+        appCompatEditText.perform(replaceText("-100"), closeSoftKeyboard());
+
+        ViewInteraction appCompatButton = onView(withId(R.id.convertButton));
+        appCompatButton.perform(click());
+
+        ViewInteraction textView = onView(withId(R.id.resultId));
+        textView.check(matches(withText("-80.00 Euros")));
+    }
 
     @Test
     public void mainActivityTest3() {
@@ -96,7 +110,6 @@ public class MainActivityTest {
         ViewInteraction textView = onView(withId(R.id.resultId));
         textView.check(matches(withText("80.00 Euros")));
     }
-
 
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
